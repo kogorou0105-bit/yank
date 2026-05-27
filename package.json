@@ -1,16 +1,44 @@
 {
-  "name": "command-helper",
+  "name": "yank-command",
   "version": "0.1.0",
-  "private": true,
+  "description": "Pick saved commands in the terminal and copy them to your clipboard.",
   "type": "module",
   "bin": {
     "yank": "./dist/index.js"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/index.tsx",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "prepack": "npm run build"
   },
+  "keywords": [
+    "cli",
+    "terminal",
+    "commands",
+    "clipboard",
+    "ink",
+    "snippets"
+  ],
+  "author": "wangyapeng",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kogorou0105-bit/yank.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kogorou0105-bit/yank/issues"
+  },
+  "homepage": "https://github.com/kogorou0105-bit/yank#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@10.33.0",
   "dependencies": {
     "clipboardy": "^4.0.0",
     "ink": "^5.2.1",

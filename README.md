@@ -4,7 +4,19 @@ Personal command picker for the terminal.
 
 `yank` stores frequently used commands, lets you pick one in an Ink-powered TUI, and copies the final command to your clipboard. Commands can include template variables like `{{componentPath}}` and `{{packageName}}`.
 
-## Install Locally
+## Install
+
+```bash
+npm install -g yank-command
+```
+
+Then run:
+
+```bash
+yank
+```
+
+## Develop Locally
 
 ```bash
 pnpm install
@@ -25,6 +37,15 @@ yank          # open interactive picker
 yank ls       # list saved commands
 yank --help   # show help
 ```
+
+## Publish
+
+```bash
+npm login --registry=https://registry.npmjs.org
+npm publish --registry=https://registry.npmjs.org
+```
+
+The npm package name is `yank-command`, while the installed CLI command is `yank`.
 
 ## Keybindings
 
