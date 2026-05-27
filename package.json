@@ -1,0 +1,26 @@
+{
+  "name": "command-helper",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "yank": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.tsx",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "clipboardy": "^4.0.0",
+    "ink": "^5.2.1",
+    "nanoid": "^5.0.9",
+    "react": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.10",
+    "@types/react": "^18.3.18",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
