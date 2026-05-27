@@ -1,6 +1,6 @@
 {
   "name": "yank-command",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Pick saved commands in the terminal and copy them to your clipboard.",
   "type": "module",
   "bin": {
