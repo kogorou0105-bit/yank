@@ -52,10 +52,18 @@ The npm package name is `yank-command`, while the installed CLI command is `yank
 ```text
 Up/Down or j/k  Select command
 Enter           Copy selected command and exit, or fill template variables
+/               Search commands
 a               Add command
 e               Edit selected command
-d               Delete selected command
+d               Delete selected command after confirmation
 q or Esc        Exit
+```
+
+Input editing:
+
+```text
+Text editing uses normal terminal input behavior.
+Backspace/Delete, cursor movement, long press, and paste are handled by the input component.
 ```
 
 ## Templates
