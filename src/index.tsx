@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
 import {render} from 'ink';
+import {spawn} from 'node:child_process';
 import {createRequire} from 'node:module';
 import {App} from './App.js';
-import {printCommands} from './commands.js';
+import {printCommandStore} from './commands.js';
 import {printHelp} from './help.js';
-import {loadCommands} from './storage.js';
+import {loadCommandStore} from './storage.js';
 
 const args = process.argv.slice(2).filter(arg => arg !== '--');
 const require = createRequire(import.meta.url);
@@ -23,13 +24,44 @@ async function run() {
   }
 
   if (args[0] === 'ls' || args[0] === 'list') {
-    const commands = await loadCommands();
+    const store = await loadCommandStore();
 
-    printCommands(commands);
+    printCommandStore(store);
     return;
   }
 
-  render(<App />);
+  let commandToRun = '';
+  const app = render(<App onRunCommand={command => {
+    commandToRun = command;
+  }} />);
+
+  await app.waitUntilExit();
+
+  if (commandToRun) {
+    await runShellCommand(commandToRun);
+  }
+}
+
+async function runShellCommand(command: string) {
+  console.log(`$ ${command}`);
+
+  await new Promise<void>((resolve, reject) => {
+    const child = spawn(command, {shell: true, stdio: 'inherit'});
+
+    child.on('error', reject);
+    child.on('exit', (code, signal) => {
+      if (signal) {
+        process.kill(process.pid, signal);
+        return;
+      }
+
+      if (code && code !== 0) {
+        process.exitCode = code;
+      }
+
+      resolve();
+    });
+  });
 }
 
 run().catch(error => {

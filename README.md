@@ -2,15 +2,16 @@
 
 Your personal command picker for the terminal.
 
-`yank` keeps frequently used commands one shortcut away. Open the Ink-powered TUI, search or edit your saved commands, fill any template variables, and copy the final command straight to your clipboard.
+`yank` keeps frequently used commands one shortcut away. Open the Ink-powered TUI, search or edit your saved commands, fill any template variables, then copy the final command to your clipboard or run it.
 
 ## ✨ Features
 
 - Fast interactive command picker powered by Ink
-- Local command storage with add, edit, delete, and list flows
-- Search by command name or command text
+- Category-based command storage with add, edit, delete, and list flows
+- Left/Right category switching for Home, System, and Install
+- Search by command name or command text in the current category
 - Template variables like `{{componentPath}}` and `{{packageName}}`
-- Clipboard-first workflow: pick a command, fill values, paste wherever you need it
+- Clipboard-first workflow by default, with opt-in command execution
 
 ## 🚀 Install
 
@@ -38,12 +39,14 @@ yank --version   # show version
 ## ⌨️ Keybindings
 
 ```text
-Up/Down or j/k  Select command
-Enter           Copy selected command and exit, or fill template variables
-/               Search commands
-a               Add command
-e               Edit selected command
-d               Delete selected command after confirmation
+Left/Right      Switch command category
+Up/Down or j/k  Select command in the current category
+Enter           Copy or run selected command, or fill template variables
+/               Search commands in the current category
+a               Add command to the current category
+e               Edit selected command in the current category
+d               Delete selected command from the current category after confirmation
+t               Toggle selected command between copy and run
 q or Esc        Exit
 ```
 
@@ -57,7 +60,20 @@ Use `{{variableName}}` inside a command:
 pnpm emo build {{packageName}} --skipCache --dependencies
 ```
 
-When that command is selected, `yank` prompts for each variable before copying the rendered result.
+When that command is selected, `yank` prompts for each variable before copying or running the rendered result.
+
+## ▶️ Actions
+
+Each command has an action:
+
+```text
+copy  Copy the command to clipboard and exit
+run   Run the command in your shell after the TUI exits
+```
+
+Commands default to `copy`. Press `t` on the selected command to toggle between `copy` and `run`.
+
+When adding or editing a command, `yank` asks you to choose `copy` or `run` before saving. Use Left/Right or `t` to switch, `c`/`r` to choose directly, and Enter to save.
 
 Previously entered variable values are saved locally at:
 
@@ -70,6 +86,14 @@ Saved commands are stored locally at:
 ```text
 ~/.command-helper/commands.json
 ```
+
+Commands are grouped by category. New installations start with `Home`, `System`, and `Install`; existing flat command lists are migrated into `Home` automatically. The old `Tools` category is migrated into `Install`.
+
+Default `System` and `Install` commands are generated for the current OS on first run:
+
+- Windows uses `dir`, PowerShell, `winget`, and `curl.exe` commands.
+- macOS uses Unix shell commands and Homebrew-based install commands.
+- Linux uses Unix shell commands plus common Debian/Ubuntu install commands where package managers are needed.
 
 ## 🛠 Develop Locally
 
