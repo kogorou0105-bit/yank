@@ -8,7 +8,7 @@ Your personal command picker for the terminal.
 
 - Fast interactive command picker powered by Ink
 - Category-based command storage with add, edit, delete, and list flows
-- Left/Right category switching for Home, System, and Install
+- Left/Right category switching for Home, Git, System, and Install
 - Search by command name or command text in the current category
 - Template variables like `{{componentPath}}` and `{{packageName}}`
 - Clipboard-first workflow by default, with opt-in command execution
@@ -87,7 +87,7 @@ Saved commands are stored locally at:
 ~/.command-helper/commands.json
 ```
 
-Commands are grouped by category. New installations start with `Home`, `System`, and `Install`; existing flat command lists are migrated into `Home` automatically. The old `Tools` category is migrated into `Install`.
+Commands are grouped by category. New installations and existing stores include `Home`, `Git`, `System`, and `Install`; existing flat command lists are migrated into `Home` automatically. The old `Tools` category is migrated into `Install`.
 
 Default `System` and `Install` commands are generated for the current OS on first run:
 

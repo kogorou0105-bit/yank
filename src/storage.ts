@@ -10,6 +10,7 @@ export const variablesFile = path.join(dataDir, 'variables.json');
 
 const fixedCategories = [
   {id: 'home', name: 'Home'},
+  {id: 'git', name: 'Git'},
   {id: 'system', name: 'System'},
   {id: 'install', name: 'Install'}
 ];
@@ -25,6 +26,11 @@ function createDefaultStore(): CommandStore {
         id: 'home',
         name: 'Home',
         commands: createHomeCommands()
+      },
+      {
+        id: 'git',
+        name: 'Git',
+        commands: []
       },
       {
         id: 'system',
